@@ -14,6 +14,19 @@ namespace ToDo.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<IEnumerable<Todo>> GetTodoLists()
         {
+            var todos = new List<TodoDTO>();
+            foreach(var item in TodoRepository.Todos)
+            {
+                TodoDTO todosItem = new TodoDTO();
+                {
+                    todosItem.Id = item.Id; 
+                    todosItem.Title = item.Title;
+                    todosItem.Description = item.Description;
+                    todosItem.Created= DateTime.Now;
+                    todosItem.Updated= DateTime.Now;
+                }
+            }
+
             return Ok(TodoRepository.Todos);
         }
 
